@@ -24,7 +24,7 @@ const Input = styled.TextInput`
 export default ({IconSvg, placeholder, value, onChangeText, password}) => {  //password
     return (
         <InputArea>
-            {/* <IconSvg width="24" height="24" fill="#FFF614" /> */}
+            <IconSvg width="24" height="24" fill="#FFF614" />
             {/* <Image source={IconSvg} style={{ width: "24", height: "24", color: '#FFF614' }} />  */}
             <Input
                 secureTextEntry={password}

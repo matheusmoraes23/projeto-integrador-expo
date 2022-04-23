@@ -102,21 +102,21 @@ export default () => {
             <InputArea>
 
                 <SignInput
-                    // IconSvg={PersonIcon}
+                    IconSvg={PersonIcon}
                     placeholder="Digite seu nome"
                     value={nameField}
                     onChangeText={t => setNameField(t)}
                 />
 
                 <SignInput
-                    // IconSvg={EmailIcon}
+                    IconSvg={EmailIcon}
                     placeholder="Digite seu e-mail"
                     value={emailField}
                     onChangeText={t => setEmailField(t)}
                 />
 
                 <SignInput
-                    // IconSvg={LockIcon}
+                    IconSvg={LockIcon}
                     placeholder="Digite sua senha"
                     value={passwordField}
                     onChangeText={t => setPasswordFild(t)}

@@ -104,14 +104,14 @@ export default () => {
             <InputArea>
 
                 <SignInput 
-                    // IconSvg={EmailIcon}
+                    IconSvg={EmailIcon}
                     placeholder="Digite seu e-mail"
                     value={emailField}
                     onChangeText={t => setEmailField(t)}
                 />
 
                 <SignInput
-                    // IconSvg={LockIcon} 
+                    IconSvg={LockIcon} 
                     placeholder="Digite sua senha"
                     value={passwordField}
                     password={true}
