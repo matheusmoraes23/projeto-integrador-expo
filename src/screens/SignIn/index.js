@@ -86,7 +86,7 @@ export default () => {
         onSubmit={(values) =>{ 
             // if(emailField != '' &&  passwordField != '') {
             //     const env = { 
-            //         emailUsuario: emailField, 
+            //         emailUsuario: emailField.trim(), 
             //         senhaUsuario: passwordField
             //     }
             //     verificarLogin(env)

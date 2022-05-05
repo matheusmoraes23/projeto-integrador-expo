@@ -13,6 +13,9 @@ import HomeScreen from '../screens/Home';
 // import Manejo from "../screens/Manejo";
 
 import CadastrarManejo from "../screens/CadastrarManejo";
+import CadastrarColmeia from "../screens/CadastrarColmeia";
+import ListarColmeia from "../screens/ListarColmeia";
+
 
 
 const Tab = createBottomTabNavigator();
@@ -22,8 +25,9 @@ export default () => {
       <Tab.Navigator tabBar={props=><CustomTabBar { ...props } />} >
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Search" component={CadastrarManejo} />
-        {/*<Tab.Screen name="Appointments" component={AppointmentsScreen} />
-        <Tab.Screen name="Favorites" component={FavoritesScreen} />
+        <Tab.Screen name="ListarColmeia" component={ListarColmeia} />
+        <Tab.Screen name="CadastrarColmeia" component={CadastrarColmeia} />
+        {/*<Tab.Screen name="Favorites" component={FavoritesScreen} />
         <Tab.Screen name="Profile" component={ProfileScreen} /> */}
       </Tab.Navigator>
   );

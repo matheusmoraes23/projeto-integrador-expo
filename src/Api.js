@@ -161,9 +161,88 @@ export default {
                 },
                 body: JSON.stringify({idUsuario: id,})
             });
-            console.log(req, "req")
+
         const json = await req.json();
-            console.log(json, "JSON")
+
+        return json;
+
+        }catch (error) { 
+            console.log(error);
+        }
+    },
+    incluirUsuario: async (dadosIncluir) => { 
+
+        try { 
+            const req = await fetch(`${BASE_API}/v1/usuario/incluir`, { 
+                method: 'POST',
+                headers:{
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({nomeUsuario: dadosIncluir.nomeUsuario,emailUsuario: dadosIncluir.emailUsuario, senhaUsuario: dadosIncluir.senhaUsuario})
+            });
+
+        const json = await req.json();
+
+        return json;
+
+        }catch (error) { 
+            console.log(error);
+        }
+    },
+    incluirManejo: async (dadosIncluir) => { 
+
+        try { 
+            const req = await fetch(`${BASE_API}/v1/manejo/incluir`, { 
+                method: 'POST',
+                headers:{
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({idApiario: dadosIncluir.idApiario,idColmeia: dadosIncluir.idColmeia, manejos: dadosIncluir.manejos})
+            });
+
+        const json = await req.json();
+
+        return json;
+
+        }catch (error) { 
+            console.log(error);
+        }
+    },
+    getColmeias: async (id) => { 
+        try { 
+            const req = await fetch(`${BASE_API}/v1/colmeia`, { 
+                method: 'POST',
+                headers:{
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({idUsuario: id,})
+            });
+
+        const json = await req.json();
+
+        return json;
+
+        }catch (error) { 
+            console.log(error);
+        }
+    },
+    incluirColmeia: async (dadosIncluir) => { 
+
+        try { 
+            const req = await fetch(`${BASE_API}/v1/colmeia/incluir`, { 
+                method: 'POST',
+                headers:{
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({idUsuario: dadosIncluir.idUsuario,idApiario: dadosIncluir.idApiario,nomeColmeia: dadosIncluir.nomeColmeia,cidade: dadosIncluir.cidade, uf: dadosIncluir.uf})
+            });
+
+        const json = await req.json();
+
         return json;
 
         }catch (error) { 

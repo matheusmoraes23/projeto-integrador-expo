@@ -9,13 +9,15 @@ export const Container = styled.SafeAreaView`
 // PARA A TELA NÃO SER TER UM SCROLL, MUDAR AQUI
 export const Scroller = styled.ScrollView`
     flex: 1;
-    padding: 20px;
+    padding-top: 25px;
 `;
 
 export const HeaderArea = styled.View`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    padding-left: 15px;
+    padding-right: 15px;
 `;
 export const HeaderTitle = styled.Text`
     font-size: 24px;
@@ -72,6 +74,41 @@ export const IncluirApiario = styled.TouchableOpacity`
 
 export const Branco = styled.ScrollView`
     background-color: #FFF;
-    height: 1750px;
+    height: 655px;
     border-radius: 50px;
+`;
+
+
+// export const InputArea = styled.View`
+//     width: 80%;
+//     height: 60px;
+//     background-color: #000;
+//     flex-direction:row;
+//     border-radius: 30px;
+//     margin-left: 40px;
+//     align-items: center;
+//     justify-content: center;
+//     margin-bottom: 15px;
+//     margin-top:130px;
+// `;
+
+export const InputArea = styled.View`
+    width: 100%;
+    padding: 40px;
+`;
+
+export const CustomButtonText = styled.Text`
+    font-size: 18px;
+    color: #FFF;
+`;
+
+export const CustomButton = styled.TouchableOpacity`
+    flex: 1;
+    height: 60px;
+    background-color: #000;
+    border-radius: 30px;
+    justify-content: center;
+    align-items: center;
+    margin-left: 55px
+    width: 70%
 `;

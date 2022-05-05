@@ -70,8 +70,8 @@ export const IncluirApiario = styled.TouchableOpacity`
 `;
 
 
-export const Branco = styled.ScrollView`
+export const Branco = styled.View`
     background-color: #FFF;
-    height: 1750px;
+    height: 615px;
     border-radius: 50px;
 `;

@@ -24,7 +24,8 @@ import SignInput from '../../components/SignInput';
 import PersonIcon from '../../assets/person.svg';
 import EmailIcon from '../../assets/email.svg';
 import LockIcon from '../../assets/lock.svg';
-import AbelhaPreLoad   from '../../assets/abelhaPreLoad.svg';
+import AbelhaPreLoad from '../../assets/abelhaPreLoad.svg';
+import { Formik } from 'formik';
 
 
 
@@ -57,20 +58,20 @@ export default () => {
 
         //     console.log(res);
 
-                // if(res.token){
-                    // await AsyncStorage.setItem('token', res.token);
+        // if(res.token){
+        // await AsyncStorage.setItem('token', res.token);
 
-                    //         userDispatch({
-                    //             type: 'setAvatar',
-                    //             payload:{
-                    //                 avatar: res.data.avatar
-                    //             }
-                    //         });
-            
-                    //         navigation.reset({
-                    //             routes:[{name: 'MainTab'}]
-                    //         });
-                // }
+        //         userDispatch({
+        //             type: 'setAvatar',
+        //             payload:{
+        //                 avatar: res.data.avatar
+        //             }
+        //         });
+
+        //         navigation.reset({
+        //             routes:[{name: 'MainTab'}]
+        //         });
+        // }
 
         //     navigation.reset({
         //         routes: [{ name: 'Preload' }]
@@ -90,51 +91,83 @@ export default () => {
 
     const styles = StyleSheet.create({
         titleText: {
-          fontSize: 20,
-          fontWeight: "bold"
+            fontSize: 20,
+            fontWeight: "bold"
         }
-      });
+    });
+
+    const incluirUsuario  = async (dadosValidar) => { 
+
+        let res = await Api.incluirUsuario(dadosValidar);
+        if(res.request == 400 && res.sucesso == false){ 
+            navigation.reset({
+                routes: [{name: 'SignUp'}]
+            });
+        } else { 
+            navigation.navigate('SignIn')
+        }
+
+    }
+
 
     return (
-        <Container>
-            <AbelhaPreLoad width="100%" height="160" />
-                <Text style={styles.titleText}>BEE APP</Text>
-            <InputArea>
+        <Formik
+            initialValues={{ email: '', senha: '' }}
+            // validationSchema={schema}
+            onSubmit={(values) => {
+                if(emailField != '' &&  passwordField != '' && nameField != '' ) {
+                    console.log(nameField,emailField,passwordField )
+                    const env = { 
+                        emailUsuario: emailField, 
+                        senhaUsuario: passwordField,
+                        nomeUsuario: nameField
+                    }
+                    incluirUsuario(env)
+                }
+            }}
+        >
+            {({ handleChange, handleBlur, handleSubmit, values }) => (
+                <Container>
+                    <AbelhaPreLoad width="100%" height="160" />
+                    <Text style={styles.titleText}>BEE APP</Text>
+                    <InputArea>
 
-                <SignInput
-                    IconSvg={PersonIcon}
-                    placeholder="Digite seu nome"
-                    value={nameField}
-                    onChangeText={t => setNameField(t)}
-                />
+                        <SignInput
+                            IconSvg={PersonIcon}
+                            placeholder="Digite seu nome"
+                            value={nameField}
+                            onChangeText={t => setNameField(t)}
+                        />
 
-                <SignInput
-                    IconSvg={EmailIcon}
-                    placeholder="Digite seu e-mail"
-                    value={emailField}
-                    onChangeText={t => setEmailField(t)}
-                />
+                        <SignInput
+                            IconSvg={EmailIcon}
+                            placeholder="Digite seu e-mail"
+                            value={emailField}
+                            onChangeText={t => setEmailField(t)}
+                        />
 
-                <SignInput
-                    IconSvg={LockIcon}
-                    placeholder="Digite sua senha"
-                    value={passwordField}
-                    onChangeText={t => setPasswordFild(t)}
-                    password={true}
-                />
+                        <SignInput
+                            IconSvg={LockIcon}
+                            placeholder="Digite sua senha"
+                            value={passwordField}
+                            onChangeText={t => setPasswordFild(t)}
+                            password={true}
+                        />
 
-                <CustomButton onPress={handleSignClick}>
-                    <CustomButtonText>CADASTRAR</CustomButtonText>
-                </CustomButton>
-            </InputArea>
+                        <CustomButton onPress={handleSubmit}>
+                            <CustomButtonText>CADASTRAR</CustomButtonText>
+                        </CustomButton>
+                    </InputArea>
 
-            <SignMessageButton onPress={handleMessageButtonClick}>
-                <SignMessageButtonText>Já possui uma conta?</SignMessageButtonText>
-                <SignMessageButtonTextBold>Faça Login</SignMessageButtonTextBold>
-            </SignMessageButton>
+                    <SignMessageButton onPress={handleMessageButtonClick}>
+                        <SignMessageButtonText>Já possui uma conta?</SignMessageButtonText>
+                        <SignMessageButtonTextBold>Faça Login</SignMessageButtonTextBold>
+                    </SignMessageButton>
 
 
 
-        </Container>
+                </Container>
+            )}
+        </Formik>
     )
 }

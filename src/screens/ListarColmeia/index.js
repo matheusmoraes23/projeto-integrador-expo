@@ -46,19 +46,19 @@ Icon.loadFont()
 
 
 
-export default ({ route }) => {
-    const navigation = useNavigation();
-
+export default ({ route,navigation }) => {
+    // const navigation = useNavigation();
 
     const [loading, setLoading] = useState(false);
     const [list, setList] = useState([])
     const [PickerValueHolder, SetPickerValueHolder] = useState([])
 
 
-
+    console.log(route, "route")
     const [refreshing, setRefreshing] = useState();
     const [idUsuario, setIdUsuario] = useState(null);
-    const [apiarios, setApiarios] = useState([]);
+    const [colmeias, setColmeias] = useState([]);
+
     useEffect(() => {
         _retrieveData = async () => {
             try {
@@ -68,18 +68,18 @@ export default ({ route }) => {
                     var novo = value != null ? JSON.parse(value) : null;
                     if (novo !== null) {
                         // We have data!!
-                        //   console.log(novo, "NOVOADASDASDA")
-                        //   setIdUsuario(novo.idUsuario);
                         var id = novo.idUsuario
+                        setIdUsuario(id);
                         const verificarApiario = async (id) => {
                             try {
                                 console.log(id, "idUsuarioidUsuarioidUsuario")
-                                let res = await Api.getApiario(id);
+                                let res = await Api.getColmeias(id);
 
                                 if (res.request == 400 && res.sucesso == false) {
                                     console.log("não existe apiario")
+                                    setTab('cadastrarColmeias')
                                 } else {
-                                    setApiarios(res.apiarios)
+                                    setColmeias(res.colmeias)
                                 }
                             } catch (error) {
                                 console.log(error)
@@ -132,18 +132,19 @@ export default ({ route }) => {
                     var novo = value != null ? JSON.parse(value) : null;
                     if (novo !== null) {
                         // We have data!!
-                        //   console.log(novo, "NOVOADASDASDA")
-                        //   setIdUsuario(novo.idUsuario);
                         var id = novo.idUsuario
+                        setIdUsuario(id);
                         const verificarApiario = async (id) => {
                             try {
                                 console.log(id, "idUsuarioidUsuarioidUsuario")
-                                let res = await Api.getApiario(id);
+                                let res = await Api.getColmeias(id);
 
                                 if (res.request == 400 && res.sucesso == false) {
                                     console.log("não existe apiario")
+                                    setTab('cadastrarColmeias')
+
                                 } else {
-                                    setApiarios(res.apiarios)
+                                    setColmeias(res.colmeias)
                                 }
                             } catch (error) {
                                 console.log(error)
@@ -190,14 +191,14 @@ export default ({ route }) => {
 
                 <Branco>
                     {
-                        apiarios.length != 0 ?
+                        colmeias && colmeias.length != 0 ?
 
 
                             <>
                                 <View>
                                     <Text style={{ marginTop: 15, marginLeft: 20 }}>
                                         {/*  vai ser o resultado, colocar uma condição ternaria  */}
-                                        Apiario selecionado foi: {apiarios && apiarios.teste}
+                                        Apiario selecionado foi: {colmeias && colmeias.teste}
                                     </Text>
                                 </View>
                             </>
@@ -212,13 +213,15 @@ export default ({ route }) => {
 
                     <ListArea>
                         {
-                            apiarios && apiarios.length != 0 ?
-                                <ComeiaItem data={apiarios} />
+                            colmeias && colmeias.length != 0 ?
+                                <ComeiaItem data={colmeias} />
                                 :
                                 <>
-                                    <IncluirApiario onPress={() => console.log('Adicionar')}>
+                                    <IncluirApiario onPress={() => navigation.navigate('CadastrarColmeia', { 
+                                        idUsuarioRota: idUsuario
+                                    })}>
                                         <AdicionarIcon width="100" height="150" />
-                                        <Text>Adicionar Apiário</Text>
+                                        <Text>Adicionar Colmeia</Text>
                                     </IncluirApiario>
                                     {/* // <ActivityIndicator size="large" color="#FFFFFF" /> */}
 
@@ -261,5 +264,6 @@ export default ({ route }) => {
                 </Branco>
             </Scroller>
         </Container>
+     
     )
 }
