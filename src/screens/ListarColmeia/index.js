@@ -46,8 +46,8 @@ Icon.loadFont()
 
 
 
-export default ({ route,navigation }) => {
-    // const navigation = useNavigation();
+export default ({ route, navigation }) => {
+    // const {  } = route.params;
 
     const [loading, setLoading] = useState(false);
     const [list, setList] = useState([])
@@ -172,11 +172,11 @@ export default ({ route,navigation }) => {
         <Container>
             {/* refreshControl faz aquele esquema de recarregar a pagina quando puxa para cima  */}
 
-            <Scroller             refreshControl={
-            <RefreshControl
-                refreshing={refreshing}
-                onRefresh={onRefresh}
-            />
+            <Scroller refreshControl={
+                <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={onRefresh}
+                />
             } >
 
 
@@ -214,10 +214,20 @@ export default ({ route,navigation }) => {
                     <ListArea>
                         {
                             colmeias && colmeias.length != 0 ?
-                                <ComeiaItem data={colmeias} />
+                                <>
+                                    {colmeias.map((item, i) => { 
+                                        return <ComeiaItem data={item} key={i} />
+                                    })}
+                                    <IncluirApiario onPress={() => navigation.navigate('CadastrarColmeia', {
+                                        idUsuarioRota: idUsuario
+                                    })}>
+                                        <AdicionarIcon width="50" height="50" />
+                                        <Text>Adicionar Colmeia</Text>
+                                    </IncluirApiario>
+                                </>
                                 :
                                 <>
-                                    <IncluirApiario onPress={() => navigation.navigate('CadastrarColmeia', { 
+                                    <IncluirApiario onPress={() => navigation.navigate('CadastrarColmeia', {
                                         idUsuarioRota: idUsuario
                                     })}>
                                         <AdicionarIcon width="100" height="150" />
@@ -264,6 +274,6 @@ export default ({ route,navigation }) => {
                 </Branco>
             </Scroller>
         </Container>
-     
+
     )
 }

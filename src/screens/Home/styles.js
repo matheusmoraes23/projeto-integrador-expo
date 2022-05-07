@@ -9,13 +9,15 @@ export const Container = styled.SafeAreaView`
 // PARA A TELA NÃO SER TER UM SCROLL, MUDAR AQUI
 export const Scroller = styled.ScrollView`
     flex: 1;
-    padding: 20px;
+    padding: 25px;
 `;
 
 export const HeaderArea = styled.View`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    padding-left: 15px;
+    padding-right: 15px;
 `;
 export const HeaderTitle = styled.Text`
     font-size: 24px;
@@ -72,6 +74,8 @@ export const IncluirApiario = styled.TouchableOpacity`
 
 export const Branco = styled.View`
     background-color: #FFF;
-    height: 615px;
+    height: 655px;
     border-radius: 50px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
 `;

@@ -249,5 +249,24 @@ export default {
             console.log(error);
         }
     },
+    getColmeia: async (id) => { 
+        try { 
+            const req = await fetch(`${BASE_API}/v1/colmeia/obter`, { 
+                method: 'POST',
+                headers:{
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({idColmeia: id,})
+            });
+
+        const json = await req.json();
+
+        return json;
+
+        }catch (error) { 
+            console.log(error);
+        }
+    },
 
 };

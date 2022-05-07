@@ -55,7 +55,66 @@ Icon.loadFont()
 
 
 export default ({ route, navigation }) => {
-    const { idUsuarioRota } = route.params;
+    const { idColmeiaRota } = route.params;
+
+    const [nomeColmeia, setNomeColmeia] = useState('');
+    const [cidade, setCidade] = useState('');
+    const [apiarioSelecionado, setApiarioSelecionado] = useState('');
+    const [apiarios, setApiarios] = useState([]);
+
+    const [ufSelecionado, setUfSelecionado] = useState('');
+
+    const [colmeiaEditar, setColmeiaEditar] = useState('');
+    const [validadorEditar, setValidadorEditar] = useState(0);
+
+    
+    const cadastrarColmeia = {
+        nomeColmeia: '',
+        cidade: '',
+        uf: '',
+        apiariosSelecionado: ''
+    }
+
+
+
+    useEffect(() => { 
+        if(idColmeiaRota){ 
+            _retrieveData = async () => { 
+
+                const obterColmeia = async (idColmeiaRota) => {
+                    try {
+                        let res = await Api.getColmeia(idColmeiaRota);
+
+                        if (res.request == 400 && res.sucesso == false) {
+                            console.log("não existe colmeia")
+                        } else {
+                            setValidadorEditar(1)
+                            setColmeiaEditar(res.colmeia)
+                        }
+                    } catch (error) {
+                        console.log(error)
+                    }
+                }
+                obterColmeia(idColmeiaRota)
+            }
+
+            _retrieveData()
+        }
+    },[idColmeiaRota])
+
+    useEffect(() => { 
+        if(validadorEditar != 0  && colmeiaEditar != ''){ 
+            setNomeColmeia(colmeiaEditar.nomeColmeia)
+            setCidade(colmeiaEditar.cidade)
+            setApiarioSelecionado(colmeiaEditar.idApiario)
+            setUfSelecionado(colmeiaEditar.uf)
+        } else { 
+            setNomeColmeia('')
+            setCidade('')
+            setApiarioSelecionado('')
+            setUfSelecionado('')
+        }
+    },[validadorEditar,colmeiaEditar])
 
 
     const [idUsuario, setIdUsuario] = useState(null);
@@ -65,7 +124,10 @@ export default ({ route, navigation }) => {
                 const value = await AsyncStorage.getItem('LOGADO');
                 var novo = value != null ? JSON.parse(value) : null;
                 if (novo !== null) {
+                    // We have data!!
+                    // console.log(novo.idUsuario, "value")
                     setIdUsuario(novo.idUsuario);
+
                     var id = novo.idUsuario
                     const verificarApiario = async (id) => {
                         try {
@@ -131,21 +193,7 @@ export default ({ route, navigation }) => {
 
 
 
-    const pickerRef = useRef();
-
-    function open() {
-        pickerRef.current.focus();
-    }
-
-    function close() {
-        pickerRef.current.blur();
-    }
-
-    const [text, onChangeText] = useState("Useless Text");
-
-
-
-    const salvarColmeia = async (colmeia) => {
+    const editarColmeia = async (colmeia) => {
 
         let res = await Api.incluirColmeia(colmeia);
         console.log(res, "res")
@@ -157,27 +205,9 @@ export default ({ route, navigation }) => {
         }
     }
 
-    const cadastrarColmeia = {
-        nomeColmeia: '',
-        cidade: '',
-        uf: '',
-        apiariosSelecionado: ''
-    }
 
-    const [nomeColmeia, setNomeColmeia] = useState('');
-    const [cidade, setCidade] = useState('');
-    const [apiarioSelecionado, setApiarioSelecionado] = useState('');
-    const [apiarios, setApiarios] = useState([]);
 
-    const [ufSelecionado, setUfSelecionado] = useState('');
 
-    useEffect(() => { 
-        setNomeColmeia('');
-        setCidade('');
-        setApiarioSelecionado('');
-        setUfSelecionado('');
-    },[])
- 
     const uf = [
          "AC",
          "AL",
@@ -212,11 +242,12 @@ export default ({ route, navigation }) => {
 
     return (
         <Formik
-            initialValues={cadastrarColmeia}
+            // initialValues={cadastrarColmeia}
             // validationSchema={schema}
             onSubmit={(values) => {
                 if (nomeColmeia != '' && cidade != '' && ufSelecionado != '' && apiarioSelecionado != '') {
                     const env = {
+                        idColmeia:  idColmeiaRota,
                         idUsuario: idUsuario,
                         idApiario: apiarioSelecionado,
                         nomeColmeia: nomeColmeia.trim(),
@@ -224,7 +255,7 @@ export default ({ route, navigation }) => {
                         uf: ufSelecionado
                     }
                     console.log("env, ",env)
-                    salvarColmeia(env)
+                    editarColmeia(env)
                 }
             }}
         >
@@ -309,7 +340,7 @@ export default ({ route, navigation }) => {
 
                             {/* </View> */}
                             <CustomButton onPress={handleSubmit}>
-                                <CustomButtonText>Cadastrar colmeia</CustomButtonText>
+                                <CustomButtonText>Atualizar colmeia</CustomButtonText>
                             </CustomButton>
                         </Branco>
 

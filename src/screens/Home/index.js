@@ -38,6 +38,7 @@ import Bee from "../../assets/bee 1.svg";
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import symbolicateStackTrace from 'react-native/Libraries/Core/Devtools/symbolicateStackTrace';
+import ApiarioItem from '../../components/ApiarioItem';
 
 Icon.loadFont()
 
@@ -213,7 +214,7 @@ export default ({ route }) => {
                     <ListArea>
                         {
                             apiarios && apiarios.length != 0 ?
-                                <ComeiaItem data={apiarios} />
+                                <ApiarioItem data={apiarios} />
                                 :
                                 <>
                                     <IncluirApiario onPress={() => console.log('Adicionar')}>

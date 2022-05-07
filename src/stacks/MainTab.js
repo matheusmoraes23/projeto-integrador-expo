@@ -15,7 +15,7 @@ import HomeScreen from '../screens/Home';
 import CadastrarManejo from "../screens/CadastrarManejo";
 import CadastrarColmeia from "../screens/CadastrarColmeia";
 import ListarColmeia from "../screens/ListarColmeia";
-
+import EditarColmeia from '../screens/EditarColmeia';
 
 
 const Tab = createBottomTabNavigator();
@@ -27,6 +27,7 @@ export default () => {
         <Tab.Screen name="Search" component={CadastrarManejo} />
         <Tab.Screen name="ListarColmeia" component={ListarColmeia} />
         <Tab.Screen name="CadastrarColmeia" component={CadastrarColmeia} />
+        <Tab.Screen name="EditarColmeia" component={EditarColmeia} />
         {/*<Tab.Screen name="Favorites" component={FavoritesScreen} />
         <Tab.Screen name="Profile" component={ProfileScreen} /> */}
       </Tab.Navigator>

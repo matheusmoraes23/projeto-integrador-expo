@@ -9,12 +9,10 @@ import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react
 
 // essa area pode ser uma view apenas, só inverter o styled com o seeprofileButton
 const Area = styled.View`
-    background-color: yellow;
+    background-color: #FFFFFF;
     margin-bottom: 20px;
     border-radius: 20px;
     padding: 15px;
-    margin-left:  30px;
-    margin-right:  30px;
     flex-direction: row;
 `;
 
@@ -26,11 +24,10 @@ const Area = styled.View`
 // `;
 
 // margin-left aqui pode ser de 20 se tiver um AVATAR
-const InfoArea = styled.TouchableOpacity`
-    flex:1;
+const InfoArea = styled.View`
     align-items: center;
-    /* margin-left: 100px; */
-    justify-content: center;
+    margin-left: 70px;
+    justify-content: space-between;
 `;
 
 
@@ -92,28 +89,23 @@ export default ({ data }) => {
     }
     const Item = ({ title }) => (
         <View style={styles.item}>
-          <Text style={styles.nomeApiario}>{nomeColmeia}</Text>
+          <Text style={styles.nomeApiario}>{nomeApiario}</Text>
         </View>
      );
 
     const renderItem = ({ item }) => <Item title={item.nomeApiario} />;
 
 
-    const editarColmeia = (id) => { 
-        navigation.navigate('EditarColmeia', {
-            idColmeiaRota: id,
-    })
-    }
 
     return ( 
         <Area> 
             {/* aqui  usa uma foto mas pode tira */}
             {/* <Avatar source={{uri: data.avatar}}  /> */}
-            <InfoArea onPress={() => {editarColmeia(data.idColmeia)}}>
-                <UserName>Nome Colmeia: {data.nomeColmeia}</UserName>
-                <UserName>Cidade: {data.cidade}</UserName>
-                <UserName>UF: {data.uf}</UserName>
-                <UserName>Situacao: {deparaSituacao(data.situacao)}</UserName>
+            <InfoArea>
+                <UserName>Nome Apiário: {data[0].nomeApiario}</UserName>
+                <UserName>Cidade: {data[0].cidade}</UserName>
+                <UserName>UF: {data[0].uf}</UserName>
+                <UserName>Situacao: {deparaSituacao(data[0].situacao)}</UserName>
                 {/* {data.name} */}
                 {/* <SeeProfileButton onPress={handleClickApiario}>
                     <SeeProfileButtonText>Ver Apíario</SeeProfileButtonText>
