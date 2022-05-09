@@ -198,7 +198,7 @@ export default ({ route, navigation }) => {
                                 <View>
                                     <Text style={{ marginTop: 15, marginLeft: 20 }}>
                                         {/*  vai ser o resultado, colocar uma condição ternaria  */}
-                                        Apiario selecionado foi: {colmeias && colmeias.teste}
+                                        Colmeias
                                     </Text>
                                 </View>
                             </>

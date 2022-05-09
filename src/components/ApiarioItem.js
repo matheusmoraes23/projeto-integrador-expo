@@ -9,12 +9,15 @@ import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react
 
 // essa area pode ser uma view apenas, só inverter o styled com o seeprofileButton
 const Area = styled.View`
-    background-color: #FFFFFF;
+    background-color: yellow;
     margin-bottom: 20px;
     border-radius: 20px;
     padding: 15px;
+    margin-left:  30px;
+    margin-right:  30px;
     flex-direction: row;
 `;
+
 
 // SE POR ACASO QUEREREM UMA IMAGEM, JÁ TA AQUI O ESPAÇO DELA 
 // const Avatar = styled.Image`
@@ -24,10 +27,11 @@ const Area = styled.View`
 // `;
 
 // margin-left aqui pode ser de 20 se tiver um AVATAR
-const InfoArea = styled.View`
+const InfoArea = styled.TouchableOpacity`
+    flex:1;
     align-items: center;
-    margin-left: 70px;
-    justify-content: space-between;
+    /* margin-left: 100px; */
+    justify-content: center;
 `;
 
 
@@ -95,33 +99,19 @@ export default ({ data }) => {
 
     const renderItem = ({ item }) => <Item title={item.nomeApiario} />;
 
-
+    const editarApiario = (id) => { 
+        navigation.navigate('EditarApiario', {
+            idApiarioRota: id,
+    })
+    }
 
     return ( 
         <Area> 
-            {/* aqui  usa uma foto mas pode tira */}
-            {/* <Avatar source={{uri: data.avatar}}  /> */}
-            <InfoArea>
-                <UserName>Nome Apiário: {data[0].nomeApiario}</UserName>
-                <UserName>Cidade: {data[0].cidade}</UserName>
-                <UserName>UF: {data[0].uf}</UserName>
-                <UserName>Situacao: {deparaSituacao(data[0].situacao)}</UserName>
-                {/* {data.name} */}
-                {/* <SeeProfileButton onPress={handleClickApiario}>
-                    <SeeProfileButtonText>Ver Apíario</SeeProfileButtonText>
-                </SeeProfileButton>
-
-                <SeeProfileButton onPress={handleClickCrias}>
-                    <SeeProfileButtonText>Manejo Crias</SeeProfileButtonText>
-                </SeeProfileButton>
-
-                <SeeProfileButton onPress={handleClickAlimentacao}>
-                    <SeeProfileButtonText>Alimentação</SeeProfileButtonText>
-                </SeeProfileButton> */}
-
-                {/* <Stars /> */}
-
-                {/* <FlatList data={data} renderItem={data} keyExtractor={item => item.idApiario} /> */}
+            <InfoArea onPress={() => {editarApiario(data.idApiario)}}>
+                <UserName>Nome Apiário: {data.nomeApiario}</UserName>
+                <UserName>Cidade: {data.cidade}</UserName>
+                <UserName>UF: {data.uf}</UserName>
+                <UserName>Situacao: {deparaSituacao(data.situacao)}</UserName>
             </InfoArea>
         </Area>
         

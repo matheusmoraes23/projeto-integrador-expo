@@ -49,7 +49,7 @@ Icon.loadFont()
 
 export default ({ route }) => {
     const navigation = useNavigation();
-
+    console.log(route, "ROUTETE")
 
     const [loading, setLoading] = useState(false);
     const [list, setList] = useState([])
@@ -61,6 +61,7 @@ export default ({ route }) => {
     const [idUsuario, setIdUsuario] = useState(null);
     const [apiarios, setApiarios] = useState([]);
     useEffect(() => {
+        if(route.params == undefined){
         _retrieveData = async () => {
             try {
                 //   const value = await AsyncStorage.getItem('LOGADO');
@@ -75,7 +76,7 @@ export default ({ route }) => {
                         const verificarApiario = async (id) => {
                             try {
                                 console.log(id, "idUsuarioidUsuarioidUsuario")
-                                let res = await Api.getApiario(id);
+                                let res = await Api.getApiarios(id);
 
                                 if (res.request == 400 && res.sucesso == false) {
                                     console.log("não existe apiario")
@@ -95,8 +96,11 @@ export default ({ route }) => {
             }
         };
 
+
         _retrieveData()
-    }, [])
+
+    }
+    }, [route.params])
 
 
 
@@ -139,11 +143,12 @@ export default ({ route }) => {
                         const verificarApiario = async (id) => {
                             try {
                                 console.log(id, "idUsuarioidUsuarioidUsuario")
-                                let res = await Api.getApiario(id);
+                                let res = await Api.getApiarios(id);
 
                                 if (res.request == 400 && res.sucesso == false) {
                                     console.log("não existe apiario")
                                 } else {
+                                    console.log(res.apiarios, "res.apiarios")
                                     setApiarios(res.apiarios)
                                 }
                             } catch (error) {
@@ -184,21 +189,20 @@ export default ({ route }) => {
                     <Bee width="26" height="26" />
                     <HeaderTitle > - </HeaderTitle>
                     {/* numberOfLines={2} */}
-                    <SearchButton onPress={() => navigation.navigate('Search')}>
+                    <SearchButton onPress={() => navigation.navigate('ListarApiario')}>
                         <SearchIcon width="26" height="26" fill="#FFFFFF" />
                     </SearchButton>
                 </HeaderArea>
 
                 <Branco>
                     {
-                        apiarios.length != 0 ?
+                        apiarios && apiarios.length != 0 ?
 
 
                             <>
                                 <View>
                                     <Text style={{ marginTop: 15, marginLeft: 20 }}>
-                                        {/*  vai ser o resultado, colocar uma condição ternaria  */}
-                                        Apiario selecionado foi: {apiarios && apiarios.teste}
+                                        <Text>Apiários</Text>
                                     </Text>
                                 </View>
                             </>
@@ -214,10 +218,23 @@ export default ({ route }) => {
                     <ListArea>
                         {
                             apiarios && apiarios.length != 0 ?
-                                <ApiarioItem data={apiarios} />
+
+                            <>
+                                {apiarios.map((item,i) => { 
+                                    return <ApiarioItem data={item} key={i} />
+                                })}
+                                <IncluirApiario onPress={() => navigation.navigate('CadastrarApiario', {
+                                        idUsuarioRota: idUsuario
+                                    })}>
+                                        <AdicionarIcon width="100" height="150" />
+                                        <Text>Adicionar Apiário</Text>
+                                    </IncluirApiario>
+                            </>
                                 :
                                 <>
-                                    <IncluirApiario onPress={() => console.log('Adicionar')}>
+                                    <IncluirApiario onPress={() => navigation.navigate('CadastrarApiario', {
+                                        idUsuarioRota: idUsuario
+                                    })}>
                                         <AdicionarIcon width="100" height="150" />
                                         <Text>Adicionar Apiário</Text>
                                     </IncluirApiario>

@@ -151,7 +151,7 @@ export default {
             console.log(error);
         }
     },
-    getApiario: async (id) => { 
+    getApiarios: async (id) => { 
         try { 
             const req = await fetch(`${BASE_API}/v1/apiario`, { 
                 method: 'POST',
@@ -258,6 +258,65 @@ export default {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({idColmeia: id,})
+            });
+
+        const json = await req.json();
+
+        return json;
+
+        }catch (error) { 
+            console.log(error);
+        }
+    },
+    incluirApiario: async (dadosIncluir) => { 
+
+        try { 
+            const req = await fetch(`${BASE_API}/v1/apiario/incluir`, { 
+                method: 'POST',
+                headers:{
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({idUsuario: dadosIncluir.idUsuario,nomeApiario: dadosIncluir.nomeApiario,cidade: dadosIncluir.cidade, uf: dadosIncluir.uf})
+            });
+
+        const json = await req.json();
+
+        return json;
+
+        }catch (error) { 
+            console.log(error);
+        }
+    },
+    getApiario: async (id) => { 
+        try { 
+            const req = await fetch(`${BASE_API}/v1/apiario/obter`, { 
+                method: 'POST',
+                headers:{
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({idApiario: id,})
+            });
+
+        const json = await req.json();
+
+        return json;
+
+        }catch (error) { 
+            console.log(error);
+        }
+    },
+    alterarApiario: async (dadosAlterar) => { 
+
+        try { 
+            const req = await fetch(`${BASE_API}/v1/apiario/alterar`, { 
+                method: 'POST',
+                headers:{
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({idApiario: dadosAlterar.idApiario,nomeApiario: dadosAlterar.nomeApiario, cidade: dadosAlterar.cidade, uf: dadosAlterar.uf})
             });
 
         const json = await req.json();
