@@ -153,7 +153,9 @@ export default ({ route, navigation }) => {
             // navigation.reset({
             //     routes: [{name: 'SignUp'}]
             // });
-            navigation.navigate('ListarApiario')
+            navigation.navigate('ListarApiario',{ 
+                recarregarPagina: 1
+            })
         }
     }
 

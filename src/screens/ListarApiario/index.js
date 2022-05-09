@@ -48,8 +48,8 @@ Icon.loadFont()
 
 
 export default ({ route }) => {
-    const navigation = useNavigation();
-    console.log(route, "ROUTETE")
+    const navigation = useNavigation()
+
 
     const [loading, setLoading] = useState(false);
     const [list, setList] = useState([])
@@ -123,7 +123,7 @@ export default ({ route }) => {
     }
 
     useEffect(() => {
-        // getComeiaApi();
+        onRefresh();
     }, [])
 
 
@@ -177,7 +177,7 @@ export default ({ route }) => {
         <Container>
             {/* refreshControl faz aquele esquema de recarregar a pagina quando puxa para cima  */}
 
-            <Scroller             refreshControl={
+            <Scroller  refreshControl={
             <RefreshControl
                 refreshing={refreshing}
                 onRefresh={onRefresh}

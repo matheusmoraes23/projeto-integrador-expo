@@ -13,7 +13,8 @@ import AccountIcon from '../assets/account.svg';
 
 const TabArea = styled.View`
     height:60px;
-    background-color: #4EADBE;
+    /* background-color: #4EADBE; */
+    background-color: #000;
     flex-direction: row;
 `;
 
@@ -55,11 +56,11 @@ export default ( { state, navigation }) => {
     return (
         <TabArea>
             <TabItem onPress={()=>goTo('ListarApiario')}>
-                <HomeIcon style={{opacity: state.index===0? 1 : 0.5}} width="24" height="24" fill="#FFFFFF" />
+                <HomeIcon style={{opacity: state.index===0? 1 : 0.5}} width="24" height="24" fill="#FFFF00" />
 
             </TabItem>
             <TabItem onPress={()=>goTo('Search')}>
-                <SearchIcon style={{opacity: state.index===1? 1 : 0.5}} width="24" height="24" fill="#FFFFFF" />
+                <SearchIcon style={{opacity: state.index===1? 1 : 0.5}} width="24" height="24" fill="#FFFF00" />
                 
             </TabItem>
             {/*<TabItemCenter onPress={()=>goTo('Appointments')}>
@@ -67,10 +68,10 @@ export default ( { state, navigation }) => {
                  style={{opacity: state.index===2? 1 : 0.5}} 
             </TabItemCenter> */}
             <TabItem onPress={()=>goTo('ListarColmeia')}>
-                <FavoriteIcon style={{opacity: state.index===3? 1 : 0.5}} width="24" height="24" fill="#FFFFFF" />
+                <FavoriteIcon style={{opacity: state.index===2? 1 : 0.5}} width="24" height="24" fill="#FFFF00" />
                 
             </TabItem>
-            <TabItem onPress={()=>goTo('Profile')}>
+            {/* <TabItem onPress={()=>goTo('Profile')}> */}
                 { /* SE O USUARIO TIVER ICONE, AQUI CARREGA ELE */}
                 {/* {user.avatar != '' ?
                     <AvatarIcon source={{uri: user.avatar}} />
@@ -79,9 +80,9 @@ export default ( { state, navigation }) => {
                 } */}
 
 
-                <AccountIcon style={{opacity: state.index===4? 1 : 0.5}} width="24" height="24" fill="#FFFFFF" />
+                {/* <AccountIcon style={{opacity: state.index===4? 1 : 0.5}} width="24" height="24" fill="#FFFF00" />
                 
-            </TabItem>
+            </TabItem> */}
         </TabArea>
     );
 }
