@@ -66,25 +66,7 @@ const SeeProfileButtonText = styled.Text`
 // recebe os dados da API como data para montar um apiario
 // o data tem  de ter todas as informações a serem passadas
 export default ({ data }) => { 
-    console.log(data, "data")
     const navigation = useNavigation();
-
-    // segundo parametro do navigate, é para passar os parametros 
-    // vai ser os parametros da tabela Apiario?
-    const handleClickApiario = () =>{
-        navigation.navigate('Apiario')
-        
-    }
-
-    const handleClickCrias = () =>{
-        navigation.navigate('Crias')
-        
-    }
-
-    const handleClickAlimentacao = () =>{
-        navigation.navigate('Alimentacao')
-        
-    }
 
     const deparaSituacao = (situacao) => {  
         switch(situacao){ 
@@ -100,7 +82,6 @@ export default ({ data }) => {
         </View>
      );
 
-    const renderItem = ({ item }) => <Item title={item.nomeApiario} />;
 
 
     const editarColmeia = (id) => { 

@@ -73,7 +73,6 @@ export default ({ route, navigation }) => {
                         setIdUsuario(id);
                         const verificarApiario = async (id) => {
                             try {
-                                console.log(id, "idUsuarioidUsuarioidUsuario")
                                 let res = await Api.getColmeias(id);
 
                                 if (res.request == 400 && res.sucesso == false) {
@@ -137,7 +136,6 @@ export default ({ route, navigation }) => {
                         setIdUsuario(id);
                         const verificarApiario = async (id) => {
                             try {
-                                console.log(id, "idUsuarioidUsuarioidUsuario")
                                 let res = await Api.getColmeias(id);
 
                                 if (res.request == 400 && res.sucesso == false) {

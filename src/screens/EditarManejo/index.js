@@ -43,13 +43,12 @@ export default ({ route }) => {
 
 
     var editar = {
-        manejo: []
+        manejos: []
     }
 
     useEffect(() => { 
         if(idManejoRota){ 
             _retrieveData = async () => { 
-                console.log(idManejoRota, "idManejoRota")
                 const obterManejo = async (idManejoRota) => {
                     try {
                         let res = await Api.getManejo(idManejoRota);
@@ -58,9 +57,9 @@ export default ({ route }) => {
                             console.log("não existe apiário")
                         } else {
                             for(let i = 0; i < res.manejo.length; i++){ 
-                                editar.manejo.push(res.manejo[i])
+                                editar.manejos.push(res.manejo[i])
                             }   
-                            console.log(editar, "EDITARR")
+                            setManejoEditar(editar);
                         }
                     } catch (error) {
                         console.log(error)
@@ -224,14 +223,15 @@ export default ({ route }) => {
         let res = await Api.incluirManejo(manejo);
 
         if(res.request == 200 && res.sucesso == true){ 
-            navigation.navigate('MainTab')
+            navigation.navigate('ListarManejo')
         }
     }
 
     return (
         <Formik
-            initialValues={tabela}
+            initialValues={manejoEditar}
             // validationSchema={schema}
+            enableReinitialize={true}
             onSubmit={(values) => {
                 const env = { 
                     idApiario: 1,
