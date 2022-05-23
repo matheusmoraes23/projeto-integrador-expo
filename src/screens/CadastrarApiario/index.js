@@ -1,20 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ScrollView, SafeAreaView, TouchableOpacity, TextInput, View, Platform, RefreshControl, StyleSheet, Text, Button, Alert, ActivityIndicator, FlatList } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-
-import { useNavigation } from '@react-navigation/native';
-// import { request, PERMISSIONS } from 'react-native-permissions';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
 import Api from '../../Api';
-import api from '../../services/api';
-
-import ComeiaItem from '../../components/ComeiaItem';
-import { TouchableNativeFeedback } from 'react-native'
-import EmailIcon from '../../assets/email.svg';
-
-import { Formik, FieldArray, } from 'formik';
-
+import { Formik } from 'formik';
 import {
     Container,
     Scroller,
@@ -36,18 +25,12 @@ import {
     CustomButton, CustomButtonText,
     Voltar
 } from './styles';
-
-
 import SearchIcon from '../../assets/search.svg';
-import AdicionarIcon from '../../assets/add.svg';
 import Bee from "../../assets/bee 1.svg";
 import NavPrev from "../../assets/nav_prev.svg";
 import LocationIcon from "../../assets/my_location.svg";
 import HomeIcon from "../../assets/home.svg";
-
-
 import Icon from 'react-native-vector-icons/Ionicons';
-import symbolicateStackTrace from 'react-native/Libraries/Core/Devtools/symbolicateStackTrace';
 import SignInput from '../../components/SignInput';
 Icon.loadFont()
 
@@ -91,68 +74,11 @@ export default ({ route, navigation }) => {
         _retrieveData()
     }, [])
 
-    // useEffect(() => {
-    //     console.log(idUsuario)
-    //     if (idUsuario != null) {
-
-    //         const verificarApiario = async (idUsuario) => {
-
-
-    //             let res = await Api.getApiario(idUsuario);
-
-    //             if (res.request == 400 && res.sucesso == false) {
-    //                 console.log("não existe apiario")
-    //             } else {
-    //                 console.log(res)
-    //                 console.log("existe apiario")
-    //             }
-
-    //         }
-
-    //         verificarApiario()
-
-    //     }
-    // }, [idUsuario])
-
-
-
-    useEffect(() => {
-        // getComeiaApi();
-    }, [])
-
-
-    // const onRefresh = () => {
-    //     setRefreshing(false);
-    //     getComeias();
-    // }
-
-    const [cursos, setCursos] = useState(['Android', 'NodeJs', 'Python', 'PHP', 'Asp'])
-    const [cursoSelecionado, setCursoSelecionado] = useState([]);
-
-
-
-    const pickerRef = useRef();
-
-    function open() {
-        pickerRef.current.focus();
-    }
-
-    function close() {
-        pickerRef.current.blur();
-    }
-
-    const [text, onChangeText] = useState("Useless Text");
-
-
 
     const salvarApiario = async (apiario) => {
 
         let res = await Api.incluirApiario(apiario);
-        console.log(res, "res")
         if (res.request == 200 && res.sucesso == true) {
-            // navigation.reset({
-            //     routes: [{name: 'SignUp'}]
-            // });
             navigation.navigate('ListarApiario',{ 
                 recarregarPagina: 1
             })

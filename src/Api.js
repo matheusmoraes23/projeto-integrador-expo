@@ -199,7 +199,7 @@ export default {
                     Accept: 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({idApiario: dadosIncluir.idApiario,idColmeia: dadosIncluir.idColmeia, manejos: dadosIncluir.manejos})
+                body: JSON.stringify({idApiario: dadosIncluir.idApiario,idColmeia: dadosIncluir.idColmeia, manejos: dadosIncluir.manejos,  idUsuario: dadosIncluir.idUsuario})
             });
 
         const json = await req.json();
@@ -317,6 +317,65 @@ export default {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({idApiario: dadosAlterar.idApiario,nomeApiario: dadosAlterar.nomeApiario, cidade: dadosAlterar.cidade, uf: dadosAlterar.uf})
+            });
+
+        const json = await req.json();
+
+        return json;
+
+        }catch (error) { 
+            console.log(error);
+        }
+    },
+
+    alterarColmeia: async (dadosAlterar) => { 
+
+        try { 
+            const req = await fetch(`${BASE_API}/v1/colmeia/alterar`, { 
+                method: 'POST',
+                headers:{
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({idColmeia: dadosAlterar.idColmeia,idUsuario: dadosAlterar.idUsuario,idApiario: dadosAlterar.idApiario,nomeColmeia: dadosAlterar.nomeColmeia, cidade: dadosAlterar.cidade, uf: dadosAlterar.uf})
+            });
+
+        const json = await req.json();
+
+        return json;
+
+        }catch (error) { 
+            console.log(error);
+        }
+    },
+    getManejos: async (id) => { 
+        try { 
+            const req = await fetch(`${BASE_API}/v1/manejo`, { 
+                method: 'POST',
+                headers:{
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({idUsuario: id,})
+            });
+
+        const json = await req.json();
+
+        return json;
+
+        }catch (error) { 
+            console.log(error);
+        }
+    },
+    getManejo: async (id) => { 
+        try { 
+            const req = await fetch(`${BASE_API}/v1/manejo/obter`, { 
+                method: 'POST',
+                headers:{
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({idManejo: id,})
             });
 
         const json = await req.json();

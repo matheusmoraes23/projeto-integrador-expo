@@ -203,19 +203,20 @@ export default ({ route, navigation }) => {
                                     <Text style={{ marginTop: 15, marginLeft: 20 }}>
                                         {/*  vai ser o resultado, colocar uma condição ternaria  */}
                                         {/* Colmeias */}
-                                        <Picker
+                                        {/* <Picker
                                 selectedValue={ufSelecionado}
                                 onValueChange={(itemValue, itemIndex) =>
                                     setUfSelecionado(itemValue)
                                 }
                                 >
                                 <Picker.Item label="Selecione um estado" value="" />
-                                {uf.map((item) => { 
-                                    return <Picker.Item label={item} value={item} />
+                                {uf.map((item, i) => { 
+                                    return <Picker.Item label={item} value={item} key={i} />
                                 })}
-                                {/* <Picker.Item label="Java" value="java" />
-                                <Picker.Item label="JavaScript" value="js" /> */}
-                                </Picker>
+                                <Picker.Item label="Java" value="java" />
+                                <Picker.Item label="JavaScript" value="js" />
+                                </Picker> */}
+                                Colmeias
                                     </Text>
                                 </View>
                             </>
@@ -238,7 +239,7 @@ export default ({ route, navigation }) => {
                                     <IncluirApiario onPress={() => navigation.navigate('CadastrarColmeia', {
                                         idUsuarioRota: idUsuario
                                     })}>
-                                        <AdicionarIcon width="50" height="50" />
+                                        <AdicionarIcon width="100" height="150" />
                                         <Text>Adicionar Colmeia</Text>
                                     </IncluirApiario>
                                 </>

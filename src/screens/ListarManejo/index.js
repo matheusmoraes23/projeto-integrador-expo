@@ -1,16 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView, View, Platform, RefreshControl, StyleSheet, Text, Button, Alert, ActivityIndicator, FlatList } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-// import { request, PERMISSIONS } from 'react-native-permissions';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
 import Api from '../../Api';
-import api from '../../services/api';
-
 import ComeiaItem from '../../components/ComeiaItem';
-import { TouchableNativeFeedback } from 'react-native'
-
-
 import {
     Container,
     Scroller,
@@ -29,17 +21,11 @@ import {
     IncluirApiario,
     Branco
 } from './styles';
-
-
 import SearchIcon from '../../assets/search.svg';
 import AdicionarIcon from '../../assets/add.svg';
 import Bee from "../../assets/bee 1.svg";
-
-
 import Icon from 'react-native-vector-icons/Ionicons';
-import symbolicateStackTrace from 'react-native/Libraries/Core/Devtools/symbolicateStackTrace';
-import ApiarioItem from '../../components/ApiarioItem';
-
+import ManejoItem from '../../components/ManejoItem';
 Icon.loadFont()
 
 
@@ -47,21 +33,15 @@ Icon.loadFont()
 
 
 
-export default ({ route }) => {
-    const navigation = useNavigation()
-
-
-    const [loading, setLoading] = useState(false);
-    const [list, setList] = useState([])
-    const [PickerValueHolder, SetPickerValueHolder] = useState([])
+export default ({ route, navigation }) => {
 
 
 
     const [refreshing, setRefreshing] = useState();
     const [idUsuario, setIdUsuario] = useState(null);
-    const [apiarios, setApiarios] = useState([]);
+    const [manejos, setManejos] = useState([]);
+
     useEffect(() => {
-        if(route.params == undefined){
         _retrieveData = async () => {
             try {
                 //   const value = await AsyncStorage.getItem('LOGADO');
@@ -71,14 +51,16 @@ export default ({ route }) => {
                     if (novo !== null) {
                         // We have data!!
                         var id = novo.idUsuario
+                        setIdUsuario(id);
                         const verificarApiario = async (id) => {
                             try {
-                                let res = await Api.getApiarios(id);
+                                let res = await Api.getManejos(id);
 
                                 if (res.request == 400 && res.sucesso == false) {
                                     console.log("não existe apiario")
                                 } else {
-                                    setApiarios(res.apiarios)
+                                    console.log(res.manejos)
+                                    setManejos(res.manejos)
                                 }
                             } catch (error) {
                                 console.log(error)
@@ -93,11 +75,8 @@ export default ({ route }) => {
             }
         };
 
-
         _retrieveData()
-
-    }
-    }, [route.params])
+    }, [])
 
 
 
@@ -119,7 +98,7 @@ export default ({ route }) => {
     }
 
     useEffect(() => {
-        onRefresh();
+        // getComeiaApi();
     }, [])
 
 
@@ -134,14 +113,15 @@ export default ({ route }) => {
                     if (novo !== null) {
                         // We have data!!
                         var id = novo.idUsuario
+                        setIdUsuario(id);
                         const verificarApiario = async (id) => {
                             try {
-                                let res = await Api.getApiarios(id);
+                                let res = await Api.getManejos(id);
 
                                 if (res.request == 400 && res.sucesso == false) {
                                     console.log("não existe apiario")
                                 } else {
-                                    setApiarios(res.apiarios)
+                                    setManejos(res.manejos)
                                 }
                             } catch (error) {
                                 console.log(error)
@@ -159,36 +139,45 @@ export default ({ route }) => {
         _retrieveData()
     }
 
+    const [cursos, setCursos] = useState(['Android', 'NodeJs', 'Python', 'PHP', 'Asp'])
+    const [cursoSelecionado, setCursoSelecionado] = useState([]);
+    const [selectedLanguage, setSelectedLanguage] = useState();
+    const [ufSelecionado, setUfSelecionado] = useState('');
+
+    const uf = [
+        "AC",
+   ]
 
     return (
         <Container>
             {/* refreshControl faz aquele esquema de recarregar a pagina quando puxa para cima  */}
 
-            <Scroller  refreshControl={
-            <RefreshControl
-                refreshing={refreshing}
-                onRefresh={onRefresh}
-            />
+            <Scroller refreshControl={
+                <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={onRefresh}
+                />
             } >
 
 
                 <HeaderArea>
                     <Bee width="26" height="26" />
                     <HeaderTitle > - </HeaderTitle>
-                    <SearchButton onPress={() => navigation.navigate('ListarApiario')}>
+                    {/* numberOfLines={2} */}
+                    <SearchButton onPress={() => navigation.navigate('Search')}>
                         <SearchIcon width="26" height="26" fill="#FFFFFF" />
                     </SearchButton>
                 </HeaderArea>
 
                 <Branco>
                     {
-                        apiarios && apiarios.length != 0 ?
+                        manejos && manejos.length != 0 ?
 
 
                             <>
                                 <View>
                                     <Text style={{ marginTop: 15, marginLeft: 20 }}>
-                                        <Text>Apiários</Text>
+                                    Manejos
                                     </Text>
                                 </View>
                             </>
@@ -203,27 +192,27 @@ export default ({ route }) => {
 
                     <ListArea>
                         {
-                            apiarios && apiarios.length != 0 ?
-
-                            <>
-                                {apiarios.map((item,i) => { 
-                                    return <ApiarioItem data={item} key={i} />
-                                })}
-                                <IncluirApiario onPress={() => navigation.navigate('CadastrarApiario', {
+                            manejos && manejos.length != 0 ?
+                                <>
+                                    {manejos.map((item, i) => { 
+                                        return <ManejoItem data={item} key={i} />
+                                    })}
+                                    <IncluirApiario onPress={() => navigation.navigate('CadastrarManejo', {
                                         idUsuarioRota: idUsuario
                                     })}>
                                         <AdicionarIcon width="100" height="150" />
-                                        <Text>Adicionar Apiário</Text>
+                                        <Text>Adicionar Manejo</Text>
                                     </IncluirApiario>
-                            </>
+                                </>
                                 :
                                 <>
-                                    <IncluirApiario onPress={() => navigation.navigate('CadastrarApiario', {
+                                    <IncluirApiario onPress={() => navigation.navigate('CadastrarManejo', {
                                         idUsuarioRota: idUsuario
                                     })}>
                                         <AdicionarIcon width="100" height="150" />
-                                        <Text>Adicionar Apiário</Text>
+                                        <Text>Adicionar Manejo</Text>
                                     </IncluirApiario>
+                                    {/* // <ActivityIndicator size="large" color="#FFFFFF" /> */}
 
                                 </>
                         }
@@ -232,5 +221,6 @@ export default ({ route }) => {
                 </Branco>
             </Scroller>
         </Container>
+
     )
 }

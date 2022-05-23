@@ -21,6 +21,9 @@ import EditarColmeia from '../screens/EditarColmeia';
 import CadastrarApiario from "../screens/CadastrarApiario";
 import EditarApiario from '../screens/EditarApiario';
 
+import ListarManejo from "../screens/ListarManejo";
+import EditarManejo from '../screens/EditarManejo';
+
 
 const Tab = createBottomTabNavigator();
 
@@ -28,20 +31,19 @@ export default () => {
   return (
       <Tab.Navigator tabBar={props=><CustomTabBar { ...props } />} >
         <Tab.Screen name="ListarApiario" component={ListarApiario} />
-        <Tab.Screen name="CadastrarApiario" component={CadastrarApiario} />
-        <Tab.Screen name="EditarApiario" component={EditarApiario} />
-
-        <Tab.Screen name="Search" component={CadastrarManejo} />
         <Tab.Screen name="ListarColmeia" component={ListarColmeia} />
-        <Tab.Screen name="CadastrarColmeia" component={CadastrarColmeia} />
-        <Tab.Screen name="EditarColmeia" component={EditarColmeia} />
+        <Tab.Screen name="ListarManejo" component={ListarManejo} />
 
-        {/* <Tab.Screen name="CadastrarColmeia" component={CadastrarColmeia} />
-        <Tab.Screen name="EditarColmeia" component={EditarColmeia} /> */}
-        {/*<Tab.Screen name="Favorites" component={FavoritesScreen} />
-        <Tab.Screen name="Profile" component={ProfileScreen} /> */}
+        <Tab.Screen name="CadastrarApiario" component={CadastrarApiario} />
+        <Tab.Screen name="CadastrarManejo" component={CadastrarManejo} />
+        <Tab.Screen name="CadastrarColmeia" component={CadastrarColmeia} />
+
+        <Tab.Screen name="EditarColmeia" component={EditarColmeia} />
+        <Tab.Screen name="EditarApiario" component={EditarApiario} />        
+        <Tab.Screen name="EditarManejo" component={EditarManejo} />        
+
+        
+
       </Tab.Navigator>
   );
 }
-
-// <Icon name="rocket" color={color} size={26} />

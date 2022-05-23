@@ -35,9 +35,43 @@ Icon.loadFont()
 
 
 export default ({ route }) => {
+    const { idManejoRota } = route.params;
     const navigation = useNavigation();
     const [list, setList] = useState([])
     const [idUsuario, setIdUsuario] = useState(null);
+    const [manejoEditar, setManejoEditar] = useState(tabela);
+
+
+    var editar = {
+        manejo: []
+    }
+
+    useEffect(() => { 
+        if(idManejoRota){ 
+            _retrieveData = async () => { 
+                console.log(idManejoRota, "idManejoRota")
+                const obterManejo = async (idManejoRota) => {
+                    try {
+                        let res = await Api.getManejo(idManejoRota);
+
+                        if (res.request == 400 && res.sucesso == false) {
+                            console.log("não existe apiário")
+                        } else {
+                            for(let i = 0; i < res.manejo.length; i++){ 
+                                editar.manejo.push(res.manejo[i])
+                            }   
+                            console.log(editar, "EDITARR")
+                        }
+                    } catch (error) {
+                        console.log(error)
+                    }
+                }
+                obterManejo(idManejoRota)
+            }
+
+            _retrieveData()
+        }
+    },[idManejoRota])
 
     useEffect(() => {
         _retrieveData = async () => {
@@ -56,57 +90,9 @@ export default ({ route }) => {
         _retrieveData()
     }, [])
 
-    useEffect(() => {
-        console.log(idUsuario)
-        if (idUsuario != null) {
 
-            const verificarApiario = async (idUsuario) => {
-
-
-                let res = await Api.getApiario(idUsuario);
-
-                if (res.request == 400 && res.sucesso == false) {
-                    console.log("não existe apiario")
-                } else {
-                    console.log(res)
-                    console.log("existe apiario")
-                }
-
-            }
-
-            verificarApiario()
-
-        }
-    }, [idUsuario])
-
-
-    const getComeiaApi = async () => {
-        try {
-
-            setList([]);
-            let res = await Api.getComeias();
-
-            if (res.sucesso = true) {
-                console.log(res.entities);
-                setList(res.entities);
-            } else {
-                alert("Erro: " + res.msg);
-            }
-
-        } catch (error) {
-            console.error(error);
-        }
-    }
 
     const pickerRef = useRef();
-
-    function open() {
-    pickerRef.current.focus();
-    }
-
-    function close() {
-    pickerRef.current.blur();
-    }
 
 
     var tabela = {
