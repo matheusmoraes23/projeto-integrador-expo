@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 
 export const Container = styled.SafeAreaView`
     flex: 1;    
-    background-color: #FFF614;
+    background-color: #87CEFA;
     margin-top: 25px;
 `;
 // PARA A TELA NÃO SER TER UM SCROLL, MUDAR AQUI
@@ -55,7 +55,7 @@ export const LoadingIcon = styled.ActivityIndicator`
         margin-top: 50px;
 `;
 
-export const ListArea = styled.View`
+export const ListArea = styled.ScrollView`
         margin-top: 50px;
         margin-bottom: 30px;
 `;
@@ -72,54 +72,10 @@ export const IncluirApiario = styled.TouchableOpacity`
 `;
 
 
-export const Branco = styled.ScrollView`
+export const Branco = styled.View`
     background-color: #FFF;
-    height: 655px;
+    height: 1000;
     border-radius: 50px;
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
-`;
-
-
-// export const InputArea = styled.View`
-//     width: 80%;
-//     height: 60px;
-//     background-color: #000;
-//     flex-direction:row;
-//     border-radius: 30px;
-//     margin-left: 40px;
-//     align-items: center;
-//     justify-content: center;
-//     margin-bottom: 15px;
-//     margin-top:130px;
-// `;
-
-export const InputArea = styled.View`
-    width: 100%;
-    padding: 40px;
-    padding-top: 110px;
-    flex-direction: column;
-`;
-
-export const CustomButtonText = styled.Text`
-    font-size: 18px;
-    color: #FFF;
-`;
-
-export const CustomButton = styled.TouchableOpacity`
-    flex: 1;
-    height: 60px;
-    background-color: #000;
-    border-radius: 30px;
-    justify-content: center;
-    align-items: center;
-    margin-left: 55px;
-    width: 70%;
-`;
-
-export const Voltar = styled.TouchableOpacity`
-    margin-top: 15px;
-     justify-content:center;
-   /* align-items: 'center'; */
-    flex-direction:row;
 `;

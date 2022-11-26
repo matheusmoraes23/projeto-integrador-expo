@@ -1,16 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView, View, Platform, RefreshControl, StyleSheet, Text, Button, Alert, ActivityIndicator, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-// import { request, PERMISSIONS } from 'react-native-permissions';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
 import Api from '../../Api';
-import api from '../../services/api';
-
-import ComeiaItem from '../../components/ComeiaItem';
-import { TouchableNativeFeedback } from 'react-native'
-
-
 import {
     Container,
     Scroller,
@@ -29,23 +21,14 @@ import {
     IncluirApiario,
     Branco
 } from './styles';
-
-
 import SearchIcon from '../../assets/search.svg';
 import AdicionarIcon from '../../assets/add.svg';
 import Bee from "../../assets/bee 1.svg";
-
-
 import Icon from 'react-native-vector-icons/Ionicons';
 import symbolicateStackTrace from 'react-native/Libraries/Core/Devtools/symbolicateStackTrace';
 import ApiarioItem from '../../components/ApiarioItem';
-
+import AguaTela from "../../assets/aguaTela.svg"
 Icon.loadFont()
-
-
-
-
-
 
 export default ({ route }) => {
     const navigation = useNavigation()
@@ -173,9 +156,9 @@ export default ({ route }) => {
 
 
                 <HeaderArea>
-                    <Bee width="26" height="26" />
-                    <HeaderTitle > - </HeaderTitle>
-                    <SearchButton onPress={() => navigation.navigate('ListarApiario')}>
+                    <AguaTela width="26" height="26" />
+                    <HeaderTitle > Relatórios </HeaderTitle>
+                    <SearchButton  onPress={() => console.log("abrir texto")}>
                         <SearchIcon width="26" height="26" fill="#FFFFFF" />
                     </SearchButton>
                 </HeaderArea>
@@ -186,11 +169,11 @@ export default ({ route }) => {
 
 
                             <>
-                                <View>
+                                {/* <View>
                                     <Text style={{ marginTop: 15, marginLeft: 20 }}>
-                                        <Text>Apiários</Text>
+                                        <Text>Relatórios</Text>
                                     </Text>
-                                </View>
+                                </View> */}
                             </>
                             :
                             null
@@ -209,20 +192,20 @@ export default ({ route }) => {
                                 {apiarios.map((item,i) => { 
                                     return <ApiarioItem data={item} key={i} />
                                 })}
-                                <IncluirApiario onPress={() => navigation.navigate('CadastrarApiario', {
+                                <IncluirApiario onPress={() => navigation.navigate('CadastrarRelatorio', {
                                         idUsuarioRota: idUsuario
                                     })}>
                                         <AdicionarIcon width="100" height="150" />
-                                        <Text>Adicionar Apiário</Text>
+                                        <Text>Adicionar Relatório</Text>
                                     </IncluirApiario>
                             </>
                                 :
                                 <>
-                                    <IncluirApiario onPress={() => navigation.navigate('CadastrarApiario', {
+                                    <IncluirApiario onPress={() => navigation.navigate('CadastrarRelatorio', {
                                         idUsuarioRota: idUsuario
                                     })}>
                                         <AdicionarIcon width="100" height="150" />
-                                        <Text>Adicionar Apiário</Text>
+                                        <Text>Adicionar Relatório</Text>
                                     </IncluirApiario>
 
                                 </>

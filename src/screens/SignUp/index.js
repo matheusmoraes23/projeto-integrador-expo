@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 // import AsyncStorage from '@react-native-community/async-storage';
-import { UserContext } from '../../contexts/UserContext';
 import { Text, StyleSheet } from "react-native";
-
 import {
     Container,
     InputArea,
@@ -13,19 +11,14 @@ import {
     SignMessageButtonText,
     SignMessageButtonTextBold
 } from './styles';
-
-
-
 import Api from '../../Api'
-
 import SignInput from '../../components/SignInput';
-
-
 import PersonIcon from '../../assets/person.svg';
 import EmailIcon from '../../assets/email.svg';
 import LockIcon from '../../assets/lock.svg';
 import AbelhaPreLoad from '../../assets/abelhaPreLoad.svg';
 import { Formik } from 'formik';
+import AguaPreLoad from "../../assets/aguaPreLoad.svg";
 
 
 
@@ -128,8 +121,8 @@ export default () => {
         >
             {({ handleChange, handleBlur, handleSubmit, values }) => (
                 <Container>
-                    <AbelhaPreLoad width="100%" height="160" />
-                    <Text style={styles.titleText}>BEE APP</Text>
+                    <AguaPreLoad width="100%" height="160" />
+                    <Text style={styles.titleText}>VISITAS TÉCNICAS</Text>
                     <InputArea>
 
                         <SignInput

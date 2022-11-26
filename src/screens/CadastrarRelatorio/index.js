@@ -30,8 +30,10 @@ import Bee from "../../assets/bee 1.svg";
 import NavPrev from "../../assets/nav_prev.svg";
 import LocationIcon from "../../assets/my_location.svg";
 import HomeIcon from "../../assets/home.svg";
+import TodayIcon from "../../assets/today.svg"
 import Icon from 'react-native-vector-icons/Ionicons';
 import SignInput from '../../components/SignInput';
+import AguaTela from "../../assets/aguaTela.svg"
 Icon.loadFont()
 
 
@@ -57,7 +59,7 @@ export default ({ route, navigation }) => {
                             if (res.request == 400 && res.sucesso == false) {
                                 console.log("não existe apiario")
                             } else {
-                                setApiarios(res.apiarios)
+                                setnomeRelatorio(res.apiarios)
                             }
                         } catch (error) {
                             console.log(error)
@@ -79,71 +81,46 @@ export default ({ route, navigation }) => {
 
         let res = await Api.incluirApiario(apiario);
         if (res.request == 200 && res.sucesso == true) {
-            navigation.navigate('ListarApiario',{ 
+            navigation.navigate('ListarRelatorio',{ 
                 recarregarPagina: 1
             })
         }
     }
 
-    const cadastrarApiario = {
-        nomeApiario: '',
-        cidade: '',
+    const cadastrarRelatorio = {
+        nomeRelatorio: '',
+        descricaoRelatorio: '',
         uf: '',
     }
 
-    const [nomeApiario, setnomeApiario] = useState('');
-    const [cidade, setCidade] = useState('');
+    const [nomeRelatorio, setnomeRelatorio] = useState('');
+    const [descricaoRelatorio, setDescricaoRelatorio] = useState('');
 
     const [ufSelecionado, setUfSelecionado] = useState('');
 
     useEffect(() => { 
-        setnomeApiario('');
-        setCidade('');
+        setnomeRelatorio('');
+        setDescricaoRelatorio('');
         setUfSelecionado('');
     },[])
  
     const uf = [
-         "AC",
-         "AL",
-         "AP",
-         "AM",
-         "BA",
-         "CE",
-         "DF",
-         "ES",
-         "GO",
-         "MA",
-         "MT",
-         "MS",
-         "MG",
-         "PA",
-         "PB",
-         "PR",
-         "PE",
-         "PI",
-         "RJ",
-         "RN",
-         "RS",
-         "RO",
-         "RR",
-         "SC",
-         "SP",
-         "SE",
-         "TO",
+        "Aberto",
+         "Fechado"
     ]
 
 
 
     return (
         <Formik
-            initialValues={cadastrarApiario}
+            initialValues={cadastrarRelatorio}
             // validationSchema={schema}
             onSubmit={(values) => {
-                if (nomeApiario != '' && cidade != '' && ufSelecionado != '') {
+                if (nomeRelatorio != '' && descricaoRelatorio != '' && ufSelecionado != '') {
                     const env = {
                         idUsuario: idUsuario,
-                        nomeApiario: nomeApiario.trim(),
-                        cidade: cidade.trim(),
+                        nomeRelatorio: nomeRelatorio.trim(),
+                        descricaoRelatorio: descricaoRelatorio.trim(),
                         uf: ufSelecionado
                     }
                     console.log("env, ",env)
@@ -161,17 +138,17 @@ export default ({ route, navigation }) => {
 
 
                         <HeaderArea>
-                            <Bee width="26" height="26" />
-                            <HeaderTitle > - </HeaderTitle>
+                            <AguaTela width="26" height="26" />
+                            <HeaderTitle > Relatório </HeaderTitle>
                             {/* numberOfLines={2} */}
-                            <SearchButton onPress={() => navigation.navigate('ListarApiario')}>
+                            <SearchButton onPress={() => navigation.navigate('ListarRelatorio')}>
                                 <SearchIcon width="26" height="26" fill="#FFFFFF" />
                             </SearchButton>
                         </HeaderArea>
 
                         <Branco>
                             {/* <View style={styles.header}> */}
-                                <Voltar onPress={() => navigation.navigate('ListarApiario')}>
+                                <Voltar onPress={() => navigation.navigate('ListarRelatorio')}>
                                     <NavPrev width="26" height="26"/>
                                     <View style={styles.headerTexto}>
                                         <Text >Voltar</Text>
@@ -182,16 +159,16 @@ export default ({ route, navigation }) => {
 
                                 <SignInput
                                     IconSvg={HomeIcon}
-                                    placeholder="Nome apiário"
-                                    value={nomeApiario}
-                                    onChangeText={t => setnomeApiario(t)}
+                                    placeholder="Nome relátorio"
+                                    value={nomeRelatorio}
+                                    onChangeText={t => setnomeRelatorio(t)}
                                 />
 
                                 <SignInput
-                                    IconSvg={LocationIcon}
-                                    placeholder="Cidade apiário"
-                                    value={cidade}
-                                    onChangeText={t => setCidade(t)}
+                                    IconSvg={TodayIcon}
+                                    placeholder="Descrição relátorio"
+                                    value={descricaoRelatorio}
+                                    onChangeText={t => setDescricaoRelatorio(t)}
                                 />
 
                                 {/* <SignInput
@@ -218,7 +195,7 @@ export default ({ route, navigation }) => {
 
                             {/* </View> */}
                             <CustomButton onPress={handleSubmit}>
-                                <CustomButtonText>Cadastrar apiário</CustomButtonText>
+                                <CustomButtonText>Cadastrar Relatório</CustomButtonText>
                             </CustomButton>
                         </Branco>
 

@@ -5,7 +5,7 @@ import CustomTabBar from '../components/CustomTabBar';
 
 
 
-import ListarApiario from '../screens/ListarApiario';
+import ListarRelatorio from '../screens/ListarRelatorio';
 // import SearchScreen from '../screens/Search';
 // import AppointmentsScreen from '../screens/Appointments';
 // import FavoritesScreen from '../screens/Favorites';
@@ -18,7 +18,7 @@ import CadastrarColmeia from "../screens/CadastrarColmeia";
 import ListarColmeia from "../screens/ListarColmeia";
 import EditarColmeia from '../screens/EditarColmeia';
 
-import CadastrarApiario from "../screens/CadastrarApiario";
+import CadastrarRelatorio from "../screens/CadastrarRelatorio";
 import EditarApiario from '../screens/EditarApiario';
 
 import ListarManejo from "../screens/ListarManejo";
@@ -30,11 +30,11 @@ const Tab = createBottomTabNavigator();
 export default () => {
   return (
       <Tab.Navigator tabBar={props=><CustomTabBar { ...props } />} >
-        <Tab.Screen name="ListarApiario" component={ListarApiario} />
+        <Tab.Screen name="ListarRelatorio" component={ListarRelatorio} />
         <Tab.Screen name="ListarColmeia" component={ListarColmeia} />
         <Tab.Screen name="ListarManejo" component={ListarManejo} />
 
-        <Tab.Screen name="CadastrarApiario" component={CadastrarApiario} />
+        <Tab.Screen name="CadastrarRelatorio" component={CadastrarRelatorio} />
         <Tab.Screen name="CadastrarManejo" component={CadastrarManejo} />
         <Tab.Screen name="CadastrarColmeia" component={CadastrarColmeia} />
 

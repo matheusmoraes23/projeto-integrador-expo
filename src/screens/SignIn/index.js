@@ -19,8 +19,8 @@ import LockIcon from '../../assets/lock.svg';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { Text, StyleSheet } from "react-native";
-import { Image } from 'react-native';
-import preLoad from "../../assets/preLoad.png";
+import AguaPreLoad from "../../assets/aguaPreLoad.svg";
+
 
 
 //import EyeOn from '../../assets/eyeOn.svg'
@@ -96,11 +96,8 @@ export default () => {
       >
         {({ handleChange, handleBlur, handleSubmit, values }) => (
         <Container>
-            <AbelhaPreLoad width="100%" height="160" />
-            {/* <Image source={preLoad} style={{ width: "100%", height: "160"}} />  */}
-            {/* <Image source={{ uri: "https://i.imgur.com/TkIrScD.png" }} /> */}
-
-            <Text style={styles.titleText}>BEE APP</Text>
+            <AguaPreLoad width="100%" height="160" />
+            <Text style={styles.titleText}>VISITAS TÉCNICAS</Text>
             <InputArea>
 
                 <SignInput 

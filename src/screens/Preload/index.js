@@ -9,6 +9,7 @@ import AbelhaPreLoad   from '../../assets/abelhaPreLoad.svg';
 import { UserContext } from '../../contexts/UserContext';
 import { Image } from 'react-native';
 import Svg, { Circle, Rect } from 'react-native-svg';
+import AguaPreLoad from "../../assets/aguaPreLoad.svg";
 
 export default () => {
     
@@ -46,7 +47,7 @@ export default () => {
     return (
         <Container>
             {/* <Svg> */}
-            <AbelhaPreLoad width="100%" height="160" />
+            <AguaPreLoad width="100%" height="160" />
             {/* </Svg> */}
             {/* <Image source={AbelhaPreLoad} style={{ width: "100%", height: "160" }} />  */}
             <LoadingIcon size="large" color="#FFFFFF" />

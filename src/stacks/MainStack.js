@@ -20,7 +20,7 @@ export default () => (
         <Stack.Screen name="SignUp"  component={SignUp} />
         <Stack.Screen name="MainTab"  component={MainTab} />
 
-        {/* <Stack.Screen name="CadastrarApiario" component={CadastrarApiario} />
+        {/* <Stack.Screen name="CadastrarRelatorio" component={CadastrarRelatorio} />
         <Stack.Screen name="EditarApiario" component={EditarApiario} />
 
 

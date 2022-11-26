@@ -137,7 +137,7 @@ export default ({ route, navigation }) => {
         let res = await Api.alterarApiario(apiario);
         console.log(res, "res")
         if (res.request == 200 && res.sucesso == true) {
-            navigation.navigate('ListarApiario')
+            navigation.navigate('ListarRelatorio')
         }
     }
 
@@ -211,7 +211,7 @@ export default ({ route, navigation }) => {
                         </HeaderArea>
 
                         <Branco>
-                                <Voltar onPress={() => navigation.navigate('ListarApiario')}>
+                                <Voltar onPress={() => navigation.navigate('ListarRelatorio')}>
                                     <NavPrev width="26" height="26"/>
                                     <View style={styles.headerTexto}>
                                         <Text >Voltar</Text>
